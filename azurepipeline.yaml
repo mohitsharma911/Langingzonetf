@@ -6,7 +6,7 @@ pool:
 variables:
   - group: landingzone
   - name: terraformVersion
-    value: '1.5.7'  # Specify the Terraform version you want to use
+    value: '1.5.7'
 
 stages:
 - stage: TerraformInit
@@ -30,6 +30,20 @@ stages:
         terraform -version
       displayName: 'Install Terraform'
     - script: |
+        export TF_VAR_decommissioned_management_group_display_name=$(TF_VAR_decommissioned_management_group_display_name)
+        export TF_VAR_decommissioned_management_group_name=$(TF_VAR_decommissioned_management_group_name)
+        export TF_VAR_environments_management_group_display_name=$(TF_VAR_environments_management_group_display_name)
+        export TF_VAR_environments_management_group_name=$(TF_VAR_environments_management_group_name)
+        export TF_VAR_platform_management_group_display_name=$(TF_VAR_platform_management_group_display_name)
+        export TF_VAR_platform_management_group_name=$(TF_VAR_platform_management_group_name)
+        export TF_VAR_root_management_group_display_name=$(TF_VAR_root_management_group_display_name)
+        export TF_VAR_root_management_group_name=$(TF_VAR_root_management_group_name)
+        export TF_VAR_sandbox_management_group_display_name=$(TF_VAR_sandbox_management_group_display_name)
+        export TF_VAR_sandbox_management_group_name=$(TF_VAR_sandbox_management_group_name)
+        export ARM_CLIENT_ID=$(ARM_CLIENT_ID)
+        export ARM_CLIENT_SECRET=$(ARM_CLIENT_SECRET)
+        export ARM_SUBSCRIPTION_ID=$(ARM_SUBSCRIPTION_ID)
+        export ARM_TENANT_ID=$(ARM_TENANT_ID)
         cd modules/managementgroups
         terraform init
       displayName: 'Terraform Init'
@@ -50,6 +64,20 @@ stages:
         terraform -version
       displayName: 'Install Terraform'
     - script: |
+        export TF_VAR_decommissioned_management_group_display_name=$(TF_VAR_decommissioned_management_group_display_name)
+        export TF_VAR_decommissioned_management_group_name=$(TF_VAR_decommissioned_management_group_name)
+        export TF_VAR_environments_management_group_display_name=$(TF_VAR_environments_management_group_display_name)
+        export TF_VAR_environments_management_group_name=$(TF_VAR_environments_management_group_name)
+        export TF_VAR_platform_management_group_display_name=$(TF_VAR_platform_management_group_display_name)
+        export TF_VAR_platform_management_group_name=$(TF_VAR_platform_management_group_name)
+        export TF_VAR_root_management_group_display_name=$(TF_VAR_root_management_group_display_name)
+        export TF_VAR_root_management_group_name=$(TF_VAR_root_management_group_name)
+        export TF_VAR_sandbox_management_group_display_name=$(TF_VAR_sandbox_management_group_display_name)
+        export TF_VAR_sandbox_management_group_name=$(TF_VAR_sandbox_management_group_name)    
+        export ARM_CLIENT_ID=$(ARM_CLIENT_ID)
+        export ARM_CLIENT_SECRET=$(ARM_CLIENT_SECRET)
+        export ARM_SUBSCRIPTION_ID=$(ARM_SUBSCRIPTION_ID)
+        export ARM_TENANT_ID=$(ARM_TENANT_ID)
         cd modules/managementgroups
         terraform plan -out=tfplan
       displayName: 'Terraform Plan'
@@ -71,6 +99,16 @@ stages:
         terraform -version
       displayName: 'Install Terraform'
     - script: |
+        export TF_VAR_decommissioned_management_group_display_name=$(TF_VAR_decommissioned_management_group_display_name)
+        export TF_VAR_decommissioned_management_group_name=$(TF_VAR_decommissioned_management_group_name)
+        export TF_VAR_environments_management_group_display_name=$(TF_VAR_environments_management_group_display_name)
+        export TF_VAR_environments_management_group_name=$(TF_VAR_environments_management_group_name)
+        export TF_VAR_platform_management_group_display_name=$(TF_VAR_platform_management_group_display_name)
+        export TF_VAR_platform_management_group_name=$(TF_VAR_platform_management_group_name)
+        export TF_VAR_root_management_group_display_name=$(TF_VAR_root_management_group_display_name)
+        export TF_VAR_root_management_group_name=$(TF_VAR_root_management_group_name)
+        export TF_VAR_sandbox_management_group_display_name=$(TF_VAR_sandbox_management_group_display_name)
+        export TF_VAR_sandbox_management_group_name=$(TF_VAR_sandbox_management_group_name)    
         export ARM_CLIENT_ID=$(ARM_CLIENT_ID)
         export ARM_CLIENT_SECRET=$(ARM_CLIENT_SECRET)
         export ARM_SUBSCRIPTION_ID=$(ARM_SUBSCRIPTION_ID)
