@@ -1,0 +1,40 @@
+resource "azurerm_management_group" "tenant_root" {
+  name        = "TenantRoot"
+  display_name = "Tenant Root Group"
+}
+
+resource "azurerm_management_group" "platform" {
+  name        = "Platform"
+  display_name = "Platform Management Group"
+  parent_management_group_id = azurerm_management_group.tenant_root.id
+}
+
+resource "azurerm_management_group" "environments" {
+  name        = "Environments"
+  display_name = "Environments Management Group"
+  parent_management_group_id = azurerm_management_group.platform.id
+}
+
+resource "azurerm_management_group" "sandbox" {
+  name        = "Sandbox"
+  display_name = "Sandbox Management Group"
+  parent_management_group_id = azurerm_management_group.platform.id
+}
+
+resource "azurerm_management_group" "non_prod" {
+  name        = "NonProd"
+  display_name = "Non-Production Management Group"
+  parent_management_group_id = azurerm_management_group.platform.id
+}
+
+resource "azurerm_management_group" "production" {
+  name        = "Production"
+  display_name = "Production Management Group"
+  parent_management_group_id = azurerm_management_group.platform.id
+}
+
+resource "azurerm_management_group" "decommissioned" {
+  name        = "Decommissioned"
+  display_name = "Decommissioned Management Group"
+  parent_management_group_id = azurerm_management_group.platform.id
+}
