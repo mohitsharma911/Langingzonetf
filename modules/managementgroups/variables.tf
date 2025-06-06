@@ -57,7 +57,6 @@ variable "root_management_group_name" {
 variable "root_management_group_display_name" {
   description = "The display name of the root management group."
   type        = string
-  default = var.root_management_group_name
 }
 
 variable "platform_management_group_name" {
