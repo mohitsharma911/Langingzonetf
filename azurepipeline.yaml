@@ -3,6 +3,9 @@ trigger: none
 pool:
   vmImage: 'ubuntu-latest'
 
+timeoutInMinutes: 15
+cancelTimeoutInMinutes: 10
+
 variables:
   terraformVersion: '1.5.7'
 
