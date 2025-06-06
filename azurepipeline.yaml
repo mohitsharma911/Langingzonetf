@@ -4,7 +4,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  terraformVersion: '1.5.7'
+  - group: landingzone
+  - name: terraformVersion
+    value: '1.5.7'  # Specify the Terraform version you want to use
 
 stages:
 - stage: TerraformInit

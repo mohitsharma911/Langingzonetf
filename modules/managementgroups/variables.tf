@@ -68,7 +68,6 @@ variable "platform_management_group_name" {
 variable "platform_management_group_display_name" {
   description = "The display name of the platform management group."
   type        = string
-  default = var.platform_management_group_name
 }
 
 variable "environments_management_group_name" {
@@ -79,8 +78,7 @@ variable "environments_management_group_name" {
 variable "environments_management_group_display_name" {
   description = "The display name of the environments management group."
   type        = string
-  default = var.environments_management_group_name
-}
+  }
 
 variable "sandbox_management_group_name" {
   description = "The name of the sandbox management group."
@@ -90,8 +88,7 @@ variable "sandbox_management_group_name" {
 variable "sandbox_management_group_display_name" {
   description = "The display name of the sandbox management group."
   type        = string
-  default = var.sandbox_management_group_name
-}
+  }
 
 variable "decommissioned_management_group_name" {
   description = "The name of the decommissioned management group."
@@ -101,5 +98,4 @@ variable "decommissioned_management_group_name" {
 variable "decommissioned_management_group_display_name" {
   description = "The display name of the decommissioned management group."
   type        = string
-  default = var.decommissioned_management_group_name
 }
