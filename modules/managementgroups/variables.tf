@@ -48,3 +48,53 @@ variable "telemetry_opt_out" {
   type        = bool
   default     = false
 }
+
+variable "root_management_group_name" {
+  description = "The name of the root management group."
+  type        = string
+}
+
+variable "root_management_group_display_name" {
+  description = "The display name of the root management group."
+  type        = string
+}
+
+variable "platform_management_group_name" {
+  description = "The name of the platform management group."
+  type        = string
+}
+
+variable "platform_management_group_display_name" {
+  description = "The display name of the platform management group."
+  type        = string
+}
+
+variable "environments_management_group_name" {
+  description = "The name of the environments management group."
+  type        = string
+}
+
+variable "environments_management_group_display_name" {
+  description = "The display name of the environments management group."
+  type        = string
+}
+
+variable "sandbox_management_group_name" {
+  description = "The name of the sandbox management group."
+  type        = string
+}
+
+variable "sandbox_management_group_display_name" {
+  description = "The display name of the sandbox management group."
+  type        = string
+}
+
+variable "decommissioned_management_group_name" {
+  description = "The name of the decommissioned management group."
+  type        = string
+}
+
+variable "decommissioned_management_group_display_name" {
+  description = "The display name of the decommissioned management group."
+  type        = string
+}
