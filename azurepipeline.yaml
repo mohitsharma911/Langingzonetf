@@ -20,9 +20,12 @@ stages:
     - script: |
         curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
       displayName: 'Install Azure CLI'
-    - task: TerraformInstaller@1
-      inputs:
-        terraformVersion: '$(terraformVersion)'
+    - script: |
+        wget https://releases.hashicorp.com/terraform/$(terraformVersion)/terraform_$(terraformVersion)_linux_amd64.zip
+        unzip terraform_$(terraformVersion)_linux_amd64.zip
+        sudo mv terraform /usr/local/bin/
+        terraform -version
+      displayName: 'Install Terraform'
     - script: |
         cd modules/managementgroups
         terraform init
@@ -35,9 +38,12 @@ stages:
   - job: Plan
     steps:
     - checkout: self
-    - task: TerraformInstaller@1
-      inputs:
-        terraformVersion: '$(terraformVersion)'
+    - script: |
+        wget https://releases.hashicorp.com/terraform/$(terraformVersion)/terraform_$(terraformVersion)_linux_amd64.zip
+        unzip terraform_$(terraformVersion)_linux_amd64.zip
+        sudo mv terraform /usr/local/bin/
+        terraform -version
+      displayName: 'Install Terraform'
     - script: |
         cd modules/managementgroups
         terraform plan -out=tfplan
@@ -51,9 +57,12 @@ stages:
   - job: Apply
     steps:
     - checkout: self
-    - task: TerraformInstaller@1
-      inputs:
-        terraformVersion: '$(terraformVersion)'
+    - script: |
+        wget https://releases.hashicorp.com/terraform/$(terraformVersion)/terraform_$(terraformVersion)_linux_amd64.zip
+        unzip terraform_$(terraformVersion)_linux_amd64.zip
+        sudo mv terraform /usr/local/bin/
+        terraform -version
+      displayName: 'Install Terraform'
     - script: |
         export ARM_CLIENT_ID=$(ARM_CLIENT_ID)
         export ARM_CLIENT_SECRET=$(ARM_CLIENT_SECRET)
