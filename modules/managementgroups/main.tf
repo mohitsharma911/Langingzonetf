@@ -11,6 +11,12 @@ provider "azurerm" {
   features {}
 }
 
+
+data "azurerm_management_group" "tenant_root" {
+  name = "eb769941-210d-4d69-9bcd-a22f54727ff8" # Existing tenant root management group ID
+}
+
+
 resource "azurerm_management_group" "IMS_root" {
   name        = "IMSRoot"
   display_name = "IMS Root Management Group"
