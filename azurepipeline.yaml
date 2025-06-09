@@ -29,10 +29,10 @@ variables:
 stages:
 - stage: DeployManagementGroups
   displayName: 'Deploy Management Groups Module'
-  condition: and(succeeded(), eq(parameters.stageToRun, 'DeployModules'), eq(parameters.jobToRun, 'DeployManagementGroups'))
   jobs:
   - job: Deploy
     displayName: 'Deploy managementgroups module'
+    condition: and(succeeded(), eq(parameters.stageToRun, 'DeployModules'), eq(parameters.jobToRun, 'DeployManagementGroups'))
     timeoutInMinutes: 15
     cancelTimeoutInMinutes: 15
     steps:
@@ -79,10 +79,10 @@ stages:
 
 - stage: DestroyManagementGroups
   displayName: 'Destroy Management Groups Module'
-  condition: and(succeeded(), eq(parameters.stageToRun, 'DestroyModules'), eq(parameters.jobToRun, 'DestroyManagementGroups'))
   jobs:
   - job: Destroy
     displayName: 'Destroy managementgroups module'
+    condition: and(succeeded(), eq(parameters.stageToRun, 'DestroyModules'), eq(parameters.jobToRun, 'DestroyManagementGroups'))
     timeoutInMinutes: 15
     cancelTimeoutInMinutes: 15
     steps:
