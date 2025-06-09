@@ -14,7 +14,7 @@ stages:
   jobs:
   - job: Deploy
     displayName: 'Deploy managementgroups module'
-    timeoutInMinutes: 45
+    timeoutInMinutes: 15
     cancelTimeoutInMinutes: 15
     steps:
     - checkout: self
