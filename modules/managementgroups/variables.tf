@@ -98,3 +98,23 @@ variable "decommissioned_management_group_display_name" {
   description = "The display name of the decommissioned management group."
   type        = string
 }
+
+variable "backend_resource_group_name" {
+  description = "The name of the backend resource group"
+  type        = string
+}
+
+variable "backend_storage_account_name" {
+  description = "The name of the backend storage account"
+  type        = string
+}
+
+variable "backend_container_name" {
+  description = "The name of the backend container"
+  type        = string
+}
+
+variable "backend_key" {
+  description = "The key for the backend state file"
+  type        = string
+}
