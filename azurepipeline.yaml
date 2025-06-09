@@ -66,6 +66,7 @@ stages:
           -backend-config="container_name=$(backend_container_name)" \
           -backend-config="key=$(backend_key)"
         terraform plan -out=tfplan
+      displayName: 'Terraform Init and Plan management groups'        
     - script : |
           export ARM_CLIENT_ID=$(ARM_CLIENT_ID)
           export ARM_CLIENT_SECRET=$(ARM_CLIENT_SECRET)
