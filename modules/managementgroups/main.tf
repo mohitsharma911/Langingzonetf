@@ -12,15 +12,10 @@ provider "azurerm" {
 }
 
 
-data "azurerm_management_group" "tenant_root" {
-  name = "eb769941-210d-4d69-9bcd-a22f54727ff8" # Existing tenant root management group ID
-}
-
-
 resource "azurerm_management_group" "IMS_root" {
   name        = "IMSRoot"
   display_name = "IMS Root Management Group"
-  parent_management_group_id = "/providers/Microsoft.Management/managementGroups/eb769941-210d-4d69-9bcd-a22f54727ff8" # Replace with your actual root management group ID  
+  parent_management_group_id = var.root_management_group_id # Replace with your actual root management group ID  
 }
 
 resource "azurerm_management_group" "platform" {

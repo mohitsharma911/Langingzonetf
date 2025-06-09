@@ -1,3 +1,10 @@
+variable "root_management_group_id" {
+  description = "The ID of the root management group (usually your tenant ID or 'root')."
+  type        = string
+  default     = "/providers/Microsoft.Management/managementGroups/eb769941-210d-4d69-9bcd-a22f54727ff8" # Replace with your actual root management group ID
+}
+
+
 variable "platform_mg_defaults_enable" {
   description = "Deploys Management, Identity and Connectivity Management Groups beneath Platform Management Group if set to true."
   type        = bool
