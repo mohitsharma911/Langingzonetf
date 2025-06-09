@@ -68,13 +68,13 @@ resource "azurerm_management_group" "decommissioned" {
 
 resource "azurerm_management_group" "non_prod" {
   name        = "NonProd"
-  display_name = "Non-Production Management Group"
+  display_name = "Non-Prod"
   parent_management_group_id = azurerm_management_group.platform.id
 }
 
 resource "azurerm_management_group" "production" {
   name        = "Production"
-  display_name = "Production Management Group"
+  display_name = "Production"
   parent_management_group_id = azurerm_management_group.platform.id
 }
 
