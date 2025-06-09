@@ -63,5 +63,12 @@ stages:
           -backend-config="container_name=$(backend_container_name)" \
           -backend-config="key=$(backend_key)"
         terraform plan -out=tfplan
-        terraform apply -auto-approve tfplan
-      displayName: 'Deploy managementgroups module'
+    - script : |
+          export ARM_CLIENT_ID=$(ARM_CLIENT_ID)
+          export ARM_CLIENT_SECRET=$(ARM_CLIENT_SECRET)
+          export ARM_SUBSCRIPTION_ID=$(ARM_SUBSCRIPTION_ID)
+          export ARM_TENANT_ID=$(ARM_TENANT_ID)
+          cd modules/managementgroups
+          terraform apply -auto-approve tfplan  
+      displayName: 'Terraform Apply got management groups'
+
