@@ -26,9 +26,9 @@ variables:
 stages:
 - stage: DeployManagementGroups
   displayName: 'Deploy Management Groups Module'
-  condition: and(succeeded(), eq(stageToRun, 'DeployModules'), eq(jobToRun, 'DeployManagementGroups'))
+  condition: and(eq('${{ parameters.stageToRun }}', 'DeployModules'), eq('${{ parameters.jobToRun }}', 'DeployManagementGroups'))
   jobs:
-  - job: Deploy
+  - job: DeployManagementGroups
     displayName: 'Deploy managementgroups module'
     pool:
       vmImage: 'ubuntu-latest'
@@ -78,9 +78,9 @@ stages:
 
 - stage: DestroyManagementGroups
   displayName: 'Destroy Management Groups Module'
-  condition: and(succeeded(), eq(stageToRun, 'DestroyModules'), eq(jobToRun, 'DestroyManagementGroups'))
+  condition: and(eq('${{ parameters.stageToRun }}', 'DestroyModules'), eq('${{ parameters.jobToRun }}', 'DestroyManagementGroups'))
   jobs:
-  - job: Destroy
+  - job: DestroyManagementGroups
     displayName: 'Destroy managementgroups module'
     pool:
       vmImage: 'ubuntu-latest'
