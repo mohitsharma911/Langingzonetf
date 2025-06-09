@@ -11,15 +11,16 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_management_group" "tenant_root" {
-  name        = "TenantRoot"
-  display_name = "Tenant Root Group"
+resource "azurerm_management_group" "IMS_root" {
+  name        = "IMSRoot"
+  display_name = "IMS Root Management Group"
+  parent_management_group_id = "/providers/Microsoft.Management/managementGroups/eb769941-210d-4d69-9bcd-a22f54727ff8" # Replace with your actual root management group ID  
 }
 
 resource "azurerm_management_group" "platform" {
   name        = "Platform"
   display_name = "Platform Management Group"
-  parent_management_group_id = azurerm_management_group.tenant_root.id
+  parent_management_group_id = azurerm_management_group.IMS_root.id
 }
 
 resource "azurerm_management_group" "environments" {
