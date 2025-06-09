@@ -17,9 +17,6 @@ parameters:
     - DeployManagementGroups
     - DestroyManagementGroups
 
-pool:
-  vmImage: 'ubuntu-latest'
-
 variables:
   - group: landingzone
   - group: Terraform_SPN
@@ -33,6 +30,8 @@ stages:
   jobs:
   - job: Deploy
     displayName: 'Deploy managementgroups module'
+    pool:
+      vmImage: 'ubuntu-latest'
     timeoutInMinutes: 15
     cancelTimeoutInMinutes: 15
     steps:
@@ -83,6 +82,8 @@ stages:
   jobs:
   - job: Destroy
     displayName: 'Destroy managementgroups module'
+    pool:
+      vmImage: 'ubuntu-latest'
     timeoutInMinutes: 15
     cancelTimeoutInMinutes: 15
     steps:
