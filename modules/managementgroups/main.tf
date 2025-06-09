@@ -73,7 +73,7 @@ resource "azurerm_management_group" "non_prod" {
 }
 
 resource "azurerm_management_group" "production" {
-  name        = "Production"
+  name        = "Platform Production"
   display_name = "Production"
   parent_management_group_id = azurerm_management_group.platform.id
 }
