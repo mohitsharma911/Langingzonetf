@@ -1,0 +1,120 @@
+name: Terraform Management Groups
+
+on:
+  workflow_dispatch:
+    inputs:
+      stageToRun:
+        description: 'Select Stage to Run'
+        required: true
+        default: 'DeployModules'
+        type: choice
+        options:
+          - DeployModules
+          - DestroyModules
+      jobToRun:
+        description: 'Select Module to Deploy'
+        required: true
+        default: 'DeployManagementGroups'
+        type: choice
+        options:
+          - DeployManagementGroups
+          - DestroyManagementGroups
+
+env:
+  terraformVersion: '1.5.7'
+
+jobs:
+  deploy-managementgroups:
+    if: ${{ github.event.inputs.stageToRun == 'DeployModules' && github.event.inputs.jobToRun == 'DeployManagementGroups' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+      - name: Install Terraform
+        run: |
+          wget https://releases.hashicorp.com/terraform/${{ env.terraformVersion }}/terraform_${{ env.terraformVersion }}_linux_amd64.zip
+          unzip terraform_${{ env.terraformVersion }}_linux_amd64.zip
+          sudo mv terraform /usr/local/bin/
+          terraform -version
+
+      - name: Terraform Init and Plan management groups
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          TF_VAR_backend_resource_group_name: ${{ secrets.BACKEND_RESOURCE_GROUP_NAME }}
+          TF_VAR_backend_storage_account_name: ${{ secrets.BACKEND_STORAGE_ACCOUNT_NAME }}
+          TF_VAR_backend_container_name: ${{ secrets.BACKEND_CONTAINER_NAME }}
+          TF_VAR_backend_key: landingzone-${{ github.ref_name }}.tfstate
+        run: |
+          cd modules/managementgroups
+          terraform init -reconfigure \
+            -backend-config="resource_group_name=${TF_VAR_backend_resource_group_name}" \
+            -backend-config="storage_account_name=${TF_VAR_backend_storage_account_name}" \
+            -backend-config="container_name=${TF_VAR_backend_container_name}" \
+            -backend-config="key=${TF_VAR_backend_key}"
+          terraform plan -out=tfplan
+
+      - name: Terraform Apply management groups
+        if: ${{ success() }}
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+        run: |
+          cd modules/managementgroups
+          terraform apply -auto-approve tfplan
+
+  destroy-managementgroups:
+    if: ${{ github.event.inputs.stageToRun == 'DestroyModules' && github.event.inputs.jobToRun == 'DestroyManagementGroups' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+      - name: Install Terraform
+        run: |
+          wget https://releases.hashicorp.com/terraform/${{ env.terraformVersion }}/terraform_${{ env.terraformVersion }}_linux_amd64.zip
+          unzip terraform_${{ env.terraformVersion }}_linux_amd64.zip
+          sudo mv terraform /usr/local/bin/
+          terraform -version
+
+      - name: Terraform Destroy management groups
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          TF_VAR_backend_resource_group_name: ${{ secrets.BACKEND_RESOURCE_GROUP_NAME }}
+          TF_VAR_backend_storage_account_name: ${{ secrets.BACKEND_STORAGE_ACCOUNT_NAME }}
+          TF_VAR_backend_container_name: ${{ secrets.BACKEND_CONTAINER_NAME }}
+          TF_VAR_backend_key: landingzone-${{ github.ref_name }}.tfstate
+        run: |
+          cd modules/managementgroups
+          terraform init -reconfigure \
+            -backend-config="resource_group_name=${TF_VAR_backend_resource_group_name}" \
+            -backend-config="storage_account_name=${TF_VAR_backend_storage_account_name}" \
+            -backend-config="container_name=${TF_VAR_backend_container_name}" \
+            -backend-config="key=${TF_VAR_backend_key}"
+          terraform destroy -auto-approve
