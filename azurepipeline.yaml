@@ -56,5 +56,5 @@ stages:
           export ARM_TENANT_ID=$(ARM_TENANT_ID)
           cd modules/managementgroups
           terraform apply -auto-approve tfplan  
-      displayName: 'Terraform Apply got management groups'
+      displayName: 'Terraform Apply management groups'
 
