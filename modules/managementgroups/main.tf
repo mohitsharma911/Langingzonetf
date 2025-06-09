@@ -11,43 +11,20 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_management_group" "tenant_root" {
-  name        = "TenantRoot"
-  display_name = "Tenant Root Group"
+# Define the root management group under the tenant
+resource "azurerm_management_group" "ims_root" {
+  name      = var.parent_management_group_name
+  display_name = var.parent_management_group_name
+  parent_management_group_id = var.root_management_group_id # This is implicitly the tenant root
 }
-
-resource "azurerm_management_group" "platform" {
-  name        = "Platform"
-  display_name = "Platform Management Group"
-  parent_management_group_id = azurerm_management_group.tenant_root.id
+# Example usage of the management group resource ID (path):
+output "management_group_id" {
+  value = azurerm_management_group.ims_root.id
 }
-
-resource "azurerm_management_group" "environments" {
-  name        = "Environments"
-  display_name = "Environments Management Group"
-  parent_management_group_id = azurerm_management_group.platform.id
-}
-
-resource "azurerm_management_group" "sandbox" {
-  name        = "Sandbox"
-  display_name = "Sandbox Management Group"
-  parent_management_group_id = azurerm_management_group.platform.id
-}
-
-resource "azurerm_management_group" "non_prod" {
-  name        = "NonProd"
-  display_name = "Non-Production Management Group"
-  parent_management_group_id = azurerm_management_group.platform.id
-}
-
-resource "azurerm_management_group" "production" {
-  name        = "Production"
-  display_name = "Production Management Group"
-  parent_management_group_id = azurerm_management_group.platform.id
-}
-
-resource "azurerm_management_group" "decommissioned" {
-  name        = "Decommissioned"
-  display_name = "Decommissioned Management Group"
-  parent_management_group_id = azurerm_management_group.platform.id
+# Tier 1 Groups
+resource "azurerm_management_group" "tier1" {
+  for_each = var.child_management_groups
+  display_name = each.value
+  name         = each.key
+  parent_management_group_id = azurerm_management_group.ims_root.id
 }

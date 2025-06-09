@@ -34,20 +34,6 @@ stages:
         echo "##vso[task.setvariable variable=backend_key]$backend_key"            
       displayName: 'Install Terraform'
     - script: |
-        export TF_VAR_decommissioned_management_group_display_name="$(decommissioned_management_group_display_name)"
-        export TF_VAR_decommissioned_management_group_name="$(decommissioned_management_group_name)"
-        export TF_VAR_environments_management_group_display_name="$(environments_management_group_display_name)"
-        export TF_VAR_environments_management_group_name="$(environments_management_group_name)"
-        export TF_VAR_platform_management_group_display_name="$(platform_management_group_display_name)"
-        export TF_VAR_platform_management_group_name="$(platform_management_group_name)"
-        export TF_VAR_sandbox_management_group_display_name="$(sandbox_management_group_display_name)"
-        export TF_VAR_sandbox_management_group_name="$(sandbox_management_group_name)"
-        export TF_VAR_tenant_root_management_group_display_name="$(tenant_root_management_group_display_name)"
-        export TF_VAR_tenant_root_management_group_name="$(tenant_root_management_group_name)"
-        export TF_VAR_non_prod_management_group_display_name="$(non_prod_management_group_display_name)"
-        export TF_VAR_non_prod_management_group_name="$(non_prod_management_group_name)"
-        export TF_VAR_production_management_group_display_name="$(production_management_group_display_name)"
-        export TF_VAR_production_management_group_name="$(production_management_group_name)"
         export TF_VAR_backend_resource_group_name=$(backend_resource_group_name)
         export TF_VAR_backend_storage_account_name=$(backend_storage_account_name)
         export TF_VAR_backend_container_name=$(backend_container_name)
