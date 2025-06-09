@@ -5,6 +5,7 @@ pool:
 
 variables:
   - group: landingzone
+  - group: Terraform_SPN
   - name: terraformVersion
     value: '1.5.7'
 
