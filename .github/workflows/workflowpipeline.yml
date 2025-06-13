@@ -47,10 +47,17 @@ jobs:
 
       - name: Terraform Init
         run: |
+          cd modules/managementgroups
           terraform init \
             -backend-config="storage_account_name=${{ secrets.backend_storage_account_name }}" \
             -backend-config="storage_container_name=${{ secrets.backend_container_name }}" \
             -backend-config="key=landingzone-main.tfstate"           # No client-secret for OIDC!
+      - name: Terraform Apply management groups
+        if: ${{ success() }}
+        run: |
+          cd modules/managementgroups
+          terraform apply -auto-approve tfplan
+
 
       # - name: Terraform Init and Plan management groups
       #   env:
