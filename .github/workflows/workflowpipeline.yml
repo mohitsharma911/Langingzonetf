@@ -61,6 +61,7 @@ jobs:
           terraform plan -out=tfplan
       - name: Terraform Apply management groups
         if: ${{ success() }}
+        run: |
           cd modules/managementgroups
           terraform apply -auto-approve tfplan
 
