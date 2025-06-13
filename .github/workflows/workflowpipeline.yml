@@ -49,6 +49,7 @@ jobs:
         run: |
           cd modules/managementgroups
           terraform init \
+            -backend-config="resource_group_name=${{ secrets.backend_resource_group_name }}" \
             -backend-config="storage_account_name=${{ secrets.backend_storage_account_name }}" \
             -backend-config="container_name=${{ secrets.backend_container_name }}" \
             -backend-config="key=landingzone-main.tfstate"           # No client-secret for OIDC!
