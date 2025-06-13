@@ -29,25 +29,25 @@ variable "telemetry_opt_out" {
   default     = false
 }
 
-variable "BACKEND_RESOURCE_GROUP_NAME" {
-  description = "The name of the backend resource group"
-  type        = string
-}
+# variable "BACKEND_RESOURCE_GROUP_NAME" {
+#   description = "The name of the backend resource group"
+#   type        = string
+# }
 
-variable "BACKEND_STORAGE_ACCOUNT_NAME" {
-  description = "The name of the backend storage account"
-  type        = string
-}
+# variable "BACKEND_STORAGE_ACCOUNT_NAME" {
+#   description = "The name of the backend storage account"
+#   type        = string
+# }
 
-variable "BACKEND_CONTAINER_NAME" {
-  description = "The name of the backend container"
-  type        = string
-}
+# variable "BACKEND_CONTAINER_NAME" {
+#   description = "The name of the backend container"
+#   type        = string
+# }
 
-variable "backend_key" {
-  description = "The key for the backend state file"
-  type        = string
-}
+# variable "backend_key" {
+#   description = "The key for the backend state file"
+#   type        = string
+# }
 
 # Management Group variables matching main.tf
 
