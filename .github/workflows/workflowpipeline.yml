@@ -1,4 +1,4 @@
-name: Terraform Management Groups
+name: LZ Management Groups Deployment
 
 on:
   workflow_dispatch:
