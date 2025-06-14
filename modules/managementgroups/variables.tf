@@ -1,32 +1,7 @@
 variable "root_management_group_id" {
   description = "The ID of the root management group (usually your tenant ID or 'root')."
   type        = string
-  default     = "/providers/Microsoft.Management/managementGroups/eb769941-210d-4d69-9bcd-a22f54727ff8" # Replace with your actual root management group ID
-}
-
-
-variable "platform_mg_defaults_enable" {
-  description = "Deploys Management, Identity and Connectivity Management Groups beneath Platform Management Group if set to true."
-  type        = bool
-  default     = true
-}
-
-variable "landing_zone_mg_children" {
-  description = "Dictionary Object to allow additional or different child Management Groups of IMS Root Management Group to be deployed."
-  type        = map(any)
-  default     = {}
-}
-
-variable "platform_mg_children" {
-  description = "Dictionary Object to allow additional or different child Management Groups of Platform Management Group to be deployed."
-  type        = map(any)
-  default     = {}
-}
-
-variable "telemetry_opt_out" {
-  description = "Set Parameter to true to Opt-out of deployment telemetry."
-  type        = bool
-  default     = false
+  default     = "/providers/Microsoft.Management/managementGroups/eb769941-210d-4d69-9bcd-a22f54727ff8"
 }
 
 variable "backend_resource_group_name" {
@@ -50,88 +25,136 @@ variable "backend_key" {
   default     = "managementgroups.terraform.tfstate"
 }
 
-# Management Group variables matching main.tf
+# Management Group names and display names as per main.tf
 
-variable "tenant_root_management_group_name" {
-  description = "The name of the tenant root management group."
+variable "ims_root_name" {
+  description = "The name of the IMS root management group."
   type        = string
-  default     = "TenantRoot"
+  default     = "IMSRoot"
 }
 
-variable "tenant_root_management_group_display_name" {
-  description = "The display name of the tenant root management group."
+variable "ims_root_display_name" {
+  description = "The display name of the IMS root management group."
   type        = string
-  default     = "Tenant Root Group"
+  default     = "IMS Root"
 }
 
-variable "platform_management_group_name" {
+variable "platform_name" {
   description = "The name of the platform management group."
   type        = string
   default     = "Platform"
 }
 
-variable "platform_management_group_display_name" {
+variable "platform_display_name" {
   description = "The display name of the platform management group."
   type        = string
-  default     = "Platform Management Group"
+  default     = "Platform"
 }
 
-variable "environments_management_group_name" {
+variable "environments_name" {
   description = "The name of the environments management group."
   type        = string
   default     = "Environments"
 }
 
-variable "environments_management_group_display_name" {
+variable "environments_display_name" {
   description = "The display name of the environments management group."
   type        = string
-  default     = "Environments Management Group"
+  default     = "Environments"
 }
 
-variable "sandbox_management_group_name" {
+variable "development_name" {
+  description = "The name of the development management group."
+  type        = string
+  default     = "Development"
+}
+
+variable "development_display_name" {
+  description = "The display name of the development management group."
+  type        = string
+  default     = "Development"
+}
+
+variable "test_name" {
+  description = "The name of the test management group."
+  type        = string
+  default     = "Test"
+}
+
+variable "test_display_name" {
+  description = "The display name of the test management group."
+  type        = string
+  default     = "Test"
+}
+
+variable "preproduction_name" {
+  description = "The name of the preproduction management group."
+  type        = string
+  default     = "PreProduction"
+}
+
+variable "preproduction_display_name" {
+  description = "The display name of the preproduction management group."
+  type        = string
+  default     = "PreProduction"
+}
+
+variable "envproduction_name" {
+  description = "The name of the production management group under environments."
+  type        = string
+  default     = "Production"
+}
+
+variable "envproduction_display_name" {
+  description = "The display name of the production management group under environments."
+  type        = string
+  default     = "Production"
+}
+
+variable "sandbox_name" {
   description = "The name of the sandbox management group."
   type        = string
   default     = "Sandbox"
 }
 
-variable "sandbox_management_group_display_name" {
+variable "sandbox_display_name" {
   description = "The display name of the sandbox management group."
   type        = string
-  default     = "Sandbox Management Group"
+  default     = "Sandbox"
 }
 
-variable "non_prod_management_group_name" {
-  description = "The name of the non-production management group."
-  type        = string
-  default     = "NonProd"
-}
-
-variable "non_prod_management_group_display_name" {
-  description = "The display name of the non-production management group."
-  type        = string
-  default     = "Non-Production Management Group"
-}
-
-variable "production_management_group_name" {
-  description = "The name of the production management group."
-  type        = string
-  default     = "Production"
-}
-
-variable "production_management_group_display_name" {
-  description = "The display name of the production management group."
-  type        = string
-  default     = "Production Management Group"
-}
-
-variable "decommissioned_management_group_name" {
+variable "decommissioned_name" {
   description = "The name of the decommissioned management group."
   type        = string
   default     = "Decommissioned"
 }
 
-variable "decommissioned_management_group_display_name" {
+variable "decommissioned_display_name" {
   description = "The display name of the decommissioned management group."
   type        = string
-  default     = "Decommissioned Management Group"
+  default     = "Decommissioned"
+}
+
+variable "non_prod_name" {
+  description = "The name of the non-production management group under platform."
+  type        = string
+  default     = "NonProd"
+}
+
+variable "non_prod_display_name" {
+  description = "The display name of the non-production management group under platform."
+  type        = string
+  default     = "Non-Prod"
+}
+
+variable "platform_production_name" {
+  description = "The name of the production management group under platform."
+  type        = string
+  default     = "Platform-Production"
+}
+
+variable "platform_production_display_name" {
+  description = "The display name of the production management group under platform."
+  type        = string
+  default     = "Production"
 }
