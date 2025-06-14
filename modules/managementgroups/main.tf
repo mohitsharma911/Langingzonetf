@@ -7,12 +7,7 @@ terraform {
   }
   required_version = ">= 1.0"
 
-  # backend "azurerm" {
-  #   resource_group_name  = var.BACKEND_RESOURCE_GROUP_NAME
-  #   storage_account_name = var.BACKEND_STORAGE_ACCOUNT_NAME
-  #   container_name       = var.BACKEND_CONTAINER_NAME
-  #   key                  = var.backend_key
-  # }
+  backend "azurerm" {}
 }
 
 provider "azurerm" {

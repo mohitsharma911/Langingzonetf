@@ -53,7 +53,7 @@ jobs:
           TF_VAR_backend_resource_group_name: ${{ secrets.BACKEND_RESOURCE_GROUP_NAME }}
           TF_VAR_backend_storage_account_name: ${{ secrets.BACKEND_STORAGE_ACCOUNT_NAME }}
           TF_VAR_backend_container_name: ${{ secrets.BACKEND_CONTAINER_NAME }}
-          TF_VAR_backend_key: landingzone-main.tfstate      
+          TF_VAR_backend_key: landingzone-main.tfstate
         run: |
           cd modules/managementgroups
           terraform init -reconfigure \
