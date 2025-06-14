@@ -29,17 +29,17 @@ variable "telemetry_opt_out" {
   default     = false
 }
 
-variable "BACKEND_RESOURCE_GROUP_NAME" {
+variable "backend_resource_group_name" {
   description = "The name of the backend resource group"
   type        = string
 }
 
-variable "BACKEND_STORAGE_ACCOUNT_NAME" {
+variable "backend_storage_account_name" {
   description = "The name of the backend storage account"
   type        = string
 }
 
-variable "BACKEND_CONTAINER_NAME" {
+variable "backend_container_name" {
   description = "The name of the backend container"
   type        = string
 }
