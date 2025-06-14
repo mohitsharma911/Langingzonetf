@@ -46,6 +46,19 @@ jobs:
         with:
           terraform_version: ${{ env.terraformVersion }}
 
+      - name: Run tflint
+        run: |
+          curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+          cd modules/managementgroups
+          tflint --init
+          tflint
+
+      - name: Run tfsec
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | sh -s -- -b /usr/local/bin
+          cd modules/managementgroups
+          tfsec .
+
       - name: Terraform Init and Plan management groups
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
