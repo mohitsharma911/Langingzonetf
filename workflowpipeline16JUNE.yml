@@ -20,30 +20,44 @@ on:
           - DeployManagementGroups
           - DestroyManagementGroups
 
-permissions:
-  id-token: write
-  contents: read
-
 env:
-  terraformVersion: 'latest'
+  terraformVersion: '1.12.2'
 
 jobs:
   deploy-managementgroups:
+    permissions:
+      id-token: write
+      contents: read
     if: ${{ github.event.inputs.stageToRun == 'DeployModules' && github.event.inputs.jobToRun == 'DeployManagementGroups' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.1
 
-      - uses: azure/login@v2
+      - uses: azure/login@v2.1.0
         with:
           client-id: ${{ secrets.ARM_CLIENT_ID }}
           tenant-id: ${{ secrets.ARM_TENANT_ID }}
           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          audience: api://AzureADTokenExchange #OIDC audience restriction for Azure login in your GitHub Actions workflow,
 
-      - uses: hashicorp/setup-terraform@v3
+      - uses: hashicorp/setup-terraform@v3.1.0
         with:
           terraform_version: ${{ env.terraformVersion }}
+
+      - name: Run tflint
+        run: |
+          curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+          cd modules/managementgroups
+          tflint --init
+          tflint
+
+      - name: Run tfsec
+        shell: bash
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash -s -- -b /usr/local/bin
+          cd modules/managementgroups
+          tfsec .
 
       - name: Terraform Init and Plan management groups
         env:
@@ -77,19 +91,23 @@ jobs:
 
 
   destroy-managementgroups:
+    permissions:
+      id-token: write
+      contents: read
     if: ${{ github.event.inputs.stageToRun == 'DestroyModules' && github.event.inputs.jobToRun == 'DestroyManagementGroups' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.1
 
-      - uses: azure/login@v2
+      - uses: azure/login@v2.1.0
         with:
           client-id: ${{ secrets.ARM_CLIENT_ID }}
           tenant-id: ${{ secrets.ARM_TENANT_ID }}
           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          audience: api://AzureADTokenExchange # OIDC audience restriction for Azure login in your GitHub Actions workflow,
 
-      - uses: hashicorp/setup-terraform@v3
+      - uses: hashicorp/setup-terraform@v3.1.0
         with:
           terraform_version: ${{ env.terraformVersion }}
 

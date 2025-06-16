@@ -59,6 +59,11 @@ jobs:
           cd modules/managementgroups
           tfsec .
 
+      - name: Run bootstrap script for creating storage for statefile
+        run: |
+          chmod +x modules/managementgroups/bootstrap.sh
+          modules/managementgroups/bootstrap.sh
+
       - name: Terraform Init and Plan management groups
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
