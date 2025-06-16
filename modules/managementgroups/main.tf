@@ -21,6 +21,7 @@ provider "azurerm" {
   features {}
 }
 
+
 resource "azurerm_management_group" "platform" {
   name        = "platform"
   display_name = "platform"
