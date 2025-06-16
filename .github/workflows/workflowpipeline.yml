@@ -20,15 +20,14 @@ on:
           - DeployManagementGroups
           - DestroyManagementGroups
 
-permissions:
-  id-token: write
-  contents: read
-
 env:
   terraformVersion: '1.12.2'
 
 jobs:
   deploy-managementgroups:
+    permissions:
+      id-token: write
+      contents: read
     if: ${{ github.event.inputs.stageToRun == 'DeployModules' && github.event.inputs.jobToRun == 'DeployManagementGroups' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -92,6 +91,9 @@ jobs:
 
 
   destroy-managementgroups:
+    permissions:
+      id-token: write
+      contents: read
     if: ${{ github.event.inputs.stageToRun == 'DestroyModules' && github.event.inputs.jobToRun == 'DestroyManagementGroups' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
