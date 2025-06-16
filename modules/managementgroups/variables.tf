@@ -1,7 +1,7 @@
 variable "root_management_group_id" {
   description = "The ID of the root management group (usually your tenant ID or 'root')."
   type        = string
-  default     = "/providers/Microsoft.Management/managementGroups/eb769941-210d-4d69-9bcd-a22f54727ff8"
+  default     = "/providers/Microsoft.Management/managementGroups/TescoIMSRootMG"
 }
 
 variable "backend_resource_group_name" {

@@ -24,66 +24,55 @@ provider "azurerm" {
 
 resource "azurerm_management_group" "IMS_root" {
   name        = "IMSRoot"
-  display_name = "IMS Root"
+  display_name = "IMS-Root"
   parent_management_group_id = var.root_management_group_id # Replace with your actual root management group ID  
 }
 
 resource "azurerm_management_group" "platform" {
-  name        = "Platform"
-  display_name = "Platform"
+  name        = "platform"
+  display_name = "platform"
   parent_management_group_id = azurerm_management_group.IMS_root.id
 }
 
 resource "azurerm_management_group" "environments" {
-  name        = "Environments"
-  display_name = "Environments"
+  name        = "environments"
+  display_name = "environments"
   parent_management_group_id = azurerm_management_group.IMS_root.id
 }
 
 resource "azurerm_management_group" "Development" {
-  name        = "Development"
-  display_name = "Development"
-  parent_management_group_id = azurerm_management_group.environments.id
-}
-
-resource "azurerm_management_group" "Test" {
-  name        = "Test"
-  display_name = "Test"
-  parent_management_group_id = azurerm_management_group.environments.id
-}
-
-resource "azurerm_management_group" "PreProduction" {
-  name        = "PreProduction"
-  display_name = "PreProduction"
+  name        = "ims-environments-development"
+  display_name = "ims-environments-development"
   parent_management_group_id = azurerm_management_group.environments.id
 }
 
 resource "azurerm_management_group" "envproduction" {
-  name        = "ims-env-production"
-  display_name = "ims-env-production"
+  name        = "ims-environments-production"
+  display_name = "ims-environments-production"
   parent_management_group_id = azurerm_management_group.environments.id
 }
 
 resource "azurerm_management_group" "sandbox" {
-  name        = "Sandbox"
-  display_name = "Sandbox"
+  name        = "ims-sandbox"
+  display_name = "ims-sandbox"
   parent_management_group_id = azurerm_management_group.IMS_root.id
 }
 
 resource "azurerm_management_group" "decommissioned" {
-  name        = "Decommissioned"
-  display_name = "Decommissioned"
+  name        = "ims-decommissioned"
+  display_name = "ims-decommissioned"
   parent_management_group_id = azurerm_management_group.IMS_root.id
 }
 
 resource "azurerm_management_group" "non_prod" {
-  name        = "NonProd"
-  display_name = "Non-Prod"
+  name        = "ims-platform-nonprod"
+  display_name = "ims-platform-nonprod"
   parent_management_group_id = azurerm_management_group.platform.id
 }
 
+
 resource "azurerm_management_group" "production" {
-  name        = "ims-plat-prod"
-  display_name = "ims-plat-prod"
+  name        = "ims-platform-production"
+  display_name = "ims-platform-production"
   parent_management_group_id = azurerm_management_group.platform.id
 }
