@@ -29,14 +29,14 @@ resource "azurerm_management_group" "IMS_root" {
 }
 
 resource "azurerm_management_group" "platform" {
-  name        = "Platform"
-  display_name = "Platform"
+  name        = "platform"
+  display_name = "platform"
   parent_management_group_id = azurerm_management_group.IMS_root.id
 }
 
 resource "azurerm_management_group" "environments" {
-  name        = "Environments"
-  display_name = "Environments"
+  name        = "environments"
+  display_name = "environments"
   parent_management_group_id = azurerm_management_group.IMS_root.id
 }
 
