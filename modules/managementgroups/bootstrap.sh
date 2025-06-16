@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Variables (edit as needed)
-RESOURCE_GROUP="rg-tfstate" # must be unique in the subscription, 1-90 chars, lowercase/numbers/hyphens only
+RESOURCE_GROUP="tfstate-tfdemo-rg" # must be unique in the subscription, 1-90 chars, lowercase/numbers/hyphens only
 LOCATION="eastus" # Azure region, e.g., eastus, westus, etc.
 STORAGE_ACCOUNT="zentfstatedemostg" # must be globally unique, 3-24 chars, lowercase/numbers only
 CONTAINER="tfstate"
@@ -33,7 +33,6 @@ az storage container create \
 
 # Enable Soft Delete for Blobs and Containers
 az storage blob service-properties delete-policy update --account-name "$STORAGE_ACCOUNT" --enable true --days-retained 7
-az storage container immutability-policy create --account-name "$STORAGE_ACCOUNT" --container-name "$CONTAINER" --period 7
 
 echo "Storage Account: $STORAGE_ACCOUNT"
 echo "Container: $CONTAINER"
