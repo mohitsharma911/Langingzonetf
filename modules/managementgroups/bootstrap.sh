@@ -18,8 +18,8 @@ az storage account create \
   --kind StorageV2 \
   --min-tls-version TLS1_2 \
   --https-only true \
-  --allow-blob-public-access true 
-
+  --allow-blob-public-access true
+  
 # Get storage account key
 ACCOUNT_KEY=$(az storage account keys list --resource-group "$RESOURCE_GROUP" --account-name "$STORAGE_ACCOUNT" --query '[0].value' -o tsv)
 
