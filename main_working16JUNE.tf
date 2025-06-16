@@ -8,10 +8,10 @@ terraform {
   required_version = ">= 1.0"
 
   backend "azurerm" {
-    resource_group_name  = "${var.backend_resource_group_name}"
-    storage_account_name = "${var.backend_storage_account_name}"
-    container_name       = "${var.backend_container_name}"
-    key                  = "${var.backend_key}" # Path to the state file in the container
+    resource_group_name  = var.backend_resource_group_name
+    storage_account_name = var.backend_storage_account_name
+    container_name       = var.backend_container_name
+    key                  = var.backend_key # Path to the state file in the container
     use_oidc_auth        = true
     use_azuread_auth     = true
   }
@@ -59,8 +59,8 @@ resource "azurerm_management_group" "PreProduction" {
 }
 
 resource "azurerm_management_group" "envproduction" {
-  name        = "Production"
-  display_name = "Production"
+  name        = "ims-env-production"
+  display_name = "ims-env-production"
   parent_management_group_id = azurerm_management_group.environments.id
 }
 
@@ -83,7 +83,7 @@ resource "azurerm_management_group" "non_prod" {
 }
 
 resource "azurerm_management_group" "production" {
-  name        = "Platform-Production"   # or "Platform_Production"
-  display_name = "Production"
+  name        = "ims-plat-prod"
+  display_name = "ims-plat-prod"
   parent_management_group_id = azurerm_management_group.platform.id
 }
