@@ -21,21 +21,16 @@ provider "azurerm" {
   features {}
 }
 
-
-data "azurerm_management_group" "IMS_root" {
-  name = "IMS-root"
-}
-
 resource "azurerm_management_group" "platform" {
   name        = "platform"
   display_name = "platform"
-  parent_management_group_id = azurerm_management_group.IMS_root.id # Use the root management group ID directly
+  parent_management_group_id = var.root_management_group_id # Use the root management group ID directly
 }
 
 resource "azurerm_management_group" "environments" {
   name        = "environments"
   display_name = "environments"
-  parent_management_group_id = azurerm_management_group.IMS_root.id  # Use the root management group ID directly
+  parent_management_group_id = var.root_management_group_id # Use the root management group ID directly
 }
 
 resource "azurerm_management_group" "Development" {
@@ -53,13 +48,13 @@ resource "azurerm_management_group" "envproduction" {
 resource "azurerm_management_group" "sandbox" {
   name        = "ims-sandbox"
   display_name = "ims-sandbox"
-  parent_management_group_id = azurerm_management_group.IMS_root.id  # Use the root management group ID directly
+  parent_management_group_id = var.root_management_group_id # Use the root management group ID directly
 }
 
 resource "azurerm_management_group" "decommissioned" {
   name        = "ims-decommissioned"
   display_name = "ims-decommissioned"
-  parent_management_group_id = azurerm_management_group.IMS_root.id  # Use the root management group ID directly
+  parent_management_group_id = var.root_management_group_id # Use the root management group ID directly
 }
 
 resource "azurerm_management_group" "non_prod" {
