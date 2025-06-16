@@ -37,7 +37,6 @@ echo "Storage Account: $STORAGE_ACCOUNT"
 echo "Container: $CONTAINER"
 
 # Guardrails included:
-# No public access (--allow-blob-public-access false, --public-access off)
 # TLS 1.2 enforced (--min-tls-version TLS1_2)
 # HTTPS only (--https-only true)
 # Private container
