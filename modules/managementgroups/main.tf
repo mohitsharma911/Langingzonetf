@@ -59,8 +59,8 @@ resource "azurerm_management_group" "PreProduction" {
 }
 
 resource "azurerm_management_group" "envproduction" {
-  name        = "ims-env-production"
-  display_name = "ims-env-production"
+  name        = "Production"
+  display_name = "Production"
   parent_management_group_id = azurerm_management_group.environments.id
 }
 
@@ -83,7 +83,7 @@ resource "azurerm_management_group" "non_prod" {
 }
 
 resource "azurerm_management_group" "production" {
-  name        = "ims-plat-prod"
-  display_name = "ims-plat-prod"
+  name        = "Platform-Production"   # or "Platform_Production"
+  display_name = "Production"
   parent_management_group_id = azurerm_management_group.platform.id
 }
