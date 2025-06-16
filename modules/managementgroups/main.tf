@@ -46,18 +46,6 @@ resource "azurerm_management_group" "Development" {
   parent_management_group_id = azurerm_management_group.environments.id
 }
 
-resource "azurerm_management_group" "Test" {
-  name        = "Test"
-  display_name = "Test"
-  parent_management_group_id = azurerm_management_group.environments.id
-}
-
-resource "azurerm_management_group" "PreProduction" {
-  name        = "PreProduction"
-  display_name = "PreProduction"
-  parent_management_group_id = azurerm_management_group.environments.id
-}
-
 resource "azurerm_management_group" "envproduction" {
   name        = "ims-environments-production"
   display_name = "ims-environments-production"
