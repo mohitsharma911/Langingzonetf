@@ -6,7 +6,6 @@ on:
       stageToRun:
         description: 'Select Stage to Run'
         required: true
-        default: 'DeployModules'
         type: choice
         options:
           - DeployModules
