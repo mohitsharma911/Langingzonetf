@@ -94,6 +94,36 @@ jobs:
           cd modules/managementgroups
           terraform apply -auto-approve tfplan
 
+      - name: Terraform Drift Detection
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          TF_VAR_backend_resource_group_name: ${{ secrets.BACKEND_RESOURCE_GROUP_NAME }}
+          TF_VAR_backend_storage_account_name: ${{ secrets.BACKEND_STORAGE_ACCOUNT_NAME }}
+          TF_VAR_backend_container_name: ${{ secrets.BACKEND_CONTAINER_NAME }}
+          TF_VAR_backend_key: managementgroups.terraform.tfstate
+        run: |
+          cd modules/managementgroups
+          terraform init -reconfigure \
+            -backend-config="resource_group_name=${TF_VAR_backend_resource_group_name}" \
+            -backend-config="storage_account_name=${TF_VAR_backend_storage_account_name}" \
+            -backend-config="container_name=${TF_VAR_backend_container_name}" \
+            -backend-config="key=${TF_VAR_backend_key}"
+          terraform plan -detailed-exitcode
+
+      - name: Terraform Apply Drift Remediation
+        if: ${{ steps.terraform_drift_detection.outcome == 'failure' }}
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+        run: |
+          cd modules/managementgroups
+          terraform apply -auto-approve
+
 
   destroy-managementgroups:
     permissions:
