@@ -18,20 +18,8 @@ az storage account create \
   --kind StorageV2 \
   --min-tls-version TLS1_2 \
   --https-only true \
-  --allow-blob-public-access false 
+  --allow-blob-public-access true
   
-
-# Restrict access to specific IP ranges
-az storage account network-rule add \
-  --resource-group "$RESOURCE_GROUP" \
-  --account-name "$STORAGE_ACCOUNT" \
-  --ip-address 64.236.200.64/28
-
-az storage account network-rule add \
-  --resource-group "$RESOURCE_GROUP" \
-  --account-name "$STORAGE_ACCOUNT" \
-  --ip-address 48.221.234.0/28
-
 # Get storage account key
 ACCOUNT_KEY=$(az storage account keys list --resource-group "$RESOURCE_GROUP" --account-name "$STORAGE_ACCOUNT" --query '[0].value' -o tsv)
 
