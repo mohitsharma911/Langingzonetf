@@ -13,7 +13,6 @@ on:
       jobToRun:
         description: 'Select Module to Deploy'
         required: true
-        default: 'DeployManagementGroups'
         type: choice
         options:
           - DeployManagementGroups
