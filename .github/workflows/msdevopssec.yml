@@ -35,6 +35,7 @@ jobs:
         tar -xf terrascan.tar.gz terrascan
         chmod +x terrascan
         ./terrascan scan -d modules/managementgroups --output sarif > terrascan-results.sarif || true
+        cat terrascan-results.sarif
         rm terrascan.tar.gz
       shell: bash
 
