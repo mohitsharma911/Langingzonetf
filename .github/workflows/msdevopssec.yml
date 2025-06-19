@@ -35,7 +35,7 @@ jobs:
       with:
         categories: IaC
         tools: checkov,terrascan 
-        sourceRoot: modules\managementgroups
+        sourceRoot: modules/managementgroups/
         file: '**/*.tf'             
 
     # with:
