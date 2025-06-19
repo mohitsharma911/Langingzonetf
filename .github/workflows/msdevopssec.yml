@@ -37,14 +37,15 @@ jobs:
       #   tools: checkov,terrascan
 
     - name: Scan Terraform code in modules/managementgroups with Terrascan
-      uses: microsoft/security-devops-action@latest
+      run: |
+        curl -sL https://github.com/tenable/terrascan/releases/latest/download/terrascan_windows_amd64.exe -o terrascan.exe
+        ./terrascan.exe scan -d modules/managementgroups --output sarif > terrascan-results.sarif
+      shell: bash
+
+    - name: Upload Terrascan SARIF results
+      uses: github/codeql-action/upload-sarif@v3
       with:
-        categories: IaC
-        tools: terrascan
-        # Optionally, specify the directory to scan
-        # If not supported as an input, use a script step instead
-      env:
-        GDN_SOURCE_ROOT: modules/managementgroups
+        sarif_file: terrascan-results.sarif
 
       # Upload alerts to the Security tab - required for MSDO results to appear in the codeQL security alerts tab on GitHub (Requires GHAS)
     - name: Upload alerts to Security tab
