@@ -24,6 +24,10 @@ jobs:
       # Checkout your code repository to scan
     - uses: actions/checkout@v3
 
+      # List files in sourceRoot
+    - name: List files in sourceRoot
+      run: dir ${{ github.workspace }}\modules\managementgroups
+
       # Run analyzers
     - name: Run Microsoft Security DevOps
       uses: microsoft/security-devops-action@latest
@@ -31,7 +35,7 @@ jobs:
       with:
         categories: IaC
         tools: checkov,terrascan      
-        sourceRoot: ${{ github.workspace }}/modules/managementgroups
+        sourceRoot: ${{ github.workspace }}\modules\managementgroups
       # with:
       #  tools: bandit,binskim,checkov,eslint,templateanalyzer,terrascan,trivy
 
