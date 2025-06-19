@@ -26,7 +26,7 @@ jobs:
 
       # List files in sourceRoot
     - name: List files in sourceRoot
-      run: dir ${{ github.workspace }}\modules\managementgroups
+      run: modules\managementgroups
 
       # Run analyzers
     - name: Run Microsoft Security DevOps
@@ -35,7 +35,7 @@ jobs:
       with:
         categories: IaC
         tools: checkov,terrascan      
-        sourceRoot: ${{ github.workspace }}\modules\managementgroups
+        sourceRoot: modules\managementgroups
       # with:
       #  tools: bandit,binskim,checkov,eslint,templateanalyzer,terrascan,trivy
 
