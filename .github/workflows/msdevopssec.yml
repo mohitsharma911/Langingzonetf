@@ -24,17 +24,10 @@ jobs:
       # Checkout your code repository to scan
     - uses: actions/checkout@v3
 
-      # List files in sourceRoot
-    - name: List files in sourceRoot
-      run: dir modules
-
       # Run analyzers
     - name: Run Microsoft Security DevOps
       uses: microsoft/security-devops-action@latest
       id: msdo
-      # with:
-      #   categories: IaC
-      #   tools: checkov,terrascan
 
     - name: Scan Terraform code in modules/managementgroups with Terrascan
       run: |
