@@ -31,7 +31,7 @@ jobs:
       with:
         categories: IaC
         tools: checkov,terrascan      
-        sourceRoot: modules/managementgroups
+        sourceRoot: ${{ github.workspace }}/modules/managementgroups
       # with:
       #  tools: bandit,binskim,checkov,eslint,templateanalyzer,terrascan,trivy
 
