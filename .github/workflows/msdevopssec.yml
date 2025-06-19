@@ -34,10 +34,9 @@ jobs:
       id: msdo
       with:
         categories: IaC
-        tools: checkov,terrascan      
+        tools: checkov,terrascan 
         sourceRoot: modules\managementgroups
-      # with:
-      #  tools: bandit,binskim,checkov,eslint,templateanalyzer,terrascan,trivy
+        file: '**/*.tf'             
 
     # with:
       # config: string. Optional. A file path to an MSDO configuration file ('*.gdnconfig').
