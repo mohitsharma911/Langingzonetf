@@ -31,8 +31,7 @@ jobs:
 
     - name: Scan Terraform code in modules/managementgroups with Terrascan
       run: |
-        curl -sL https://github.com/tenable/terrascan/releases/latest/download/terrascan_linux_amd64.tar.gz -o terrascan.tar.gz
-        tar -xzf terrascan.tar.gz terrascan
+        curl -sL https://github.com/tenable/terrascan/releases/latest/download/terrascan_linux_amd64 -o terrascan
         chmod +x terrascan
         ./terrascan scan -d modules/managementgroups --output sarif > terrascan-results.sarif
       shell: bash
