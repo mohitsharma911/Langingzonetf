@@ -1,0 +1,16 @@
+scanRules:
+  skipDirs:
+    - .github
+    - .gdn
+    - modules/managementgroups/bootstrap.sh
+    - bootstrap_backup18JUNE.sh
+    - README.md
+    - azurepipeline.yaml
+    - workflowpipeline16JUNE.yml
+    - state_storage.tf
+  skipFiles:
+    - '**/*.yml'
+    - '**/*.yaml'
+    - '**/*.md'
+    - '**/*.sh'
+    - '**/*.json'
