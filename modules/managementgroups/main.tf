@@ -70,3 +70,14 @@ resource "azurerm_management_group" "production" {
   display_name = "ims-platform-production"
   parent_management_group_id = azurerm_management_group.platform.id
 }
+
+# Vulnerable resource: Storage account with public access enabled (detected by terrascan)
+resource "azurerm_storage_account" "vulnerable" {
+  name                     = "vulnstorageacct123"
+  resource_group_name      = var.backend_resource_group_name
+  location                 = "eastus"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+
+  allow_blob_public_access = true # This is a vulnerability
+}
