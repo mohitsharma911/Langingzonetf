@@ -26,7 +26,7 @@ jobs:
 
       # List files in sourceRoot
     - name: List files in sourceRoot
-      run: dir modules\managementgroups
+      run: dir modules
 
       # Run analyzers
     - name: Run Microsoft Security DevOps
@@ -34,8 +34,7 @@ jobs:
       id: msdo
       with:
         categories: IaC
-        tools: checkov,terrascan 
-        sourceRoot: modules/managementgroups/
+        tools: checkov,terrascan
         file: '**/*.tf'             
 
     # with:
