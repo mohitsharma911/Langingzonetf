@@ -32,9 +32,9 @@ jobs:
     - name: Run Microsoft Security DevOps
       uses: microsoft/security-devops-action@latest
       id: msdo
-      with:
-        categories: IaC
-        tools: checkov,terrascan
+      # with:
+      #   categories: IaC
+      #   tools: checkov,terrascan
 
     - name: Scan Terraform code in modules/managementgroups with Terrascan
       uses: microsoft/security-devops-action@latest
