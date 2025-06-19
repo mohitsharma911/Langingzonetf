@@ -21,22 +21,22 @@ az storage account create \
   --allow-blob-public-access false 
   
 
-# Restrict access to specific IP ranges
-az storage account network-rule add \
-  --resource-group "$RESOURCE_GROUP" \
-  --account-name "$STORAGE_ACCOUNT" \
-  --ip-address 64.236.200.64/28
+# # Restrict access to specific IP ranges
+# az storage account network-rule add \
+#   --resource-group "$RESOURCE_GROUP" \
+#   --account-name "$STORAGE_ACCOUNT" \
+#   --ip-address 64.236.200.64/28
 
-az storage account network-rule add \
-  --resource-group "$RESOURCE_GROUP" \
-  --account-name "$STORAGE_ACCOUNT" \
-  --ip-address 48.221.234.0/28
+# az storage account network-rule add \
+#   --resource-group "$RESOURCE_GROUP" \
+#   --account-name "$STORAGE_ACCOUNT" \
+#   --ip-address 48.221.234.0/28
 
-# Set default action to Deny (only allow selected networks and IPs)
-az storage account update \
-  --name "$STORAGE_ACCOUNT" \
-  --resource-group "$RESOURCE_GROUP" \
-  --default-action Deny
+# # Set default action to Deny (only allow selected networks and IPs)
+# az storage account update \
+#   --name "$STORAGE_ACCOUNT" \
+#   --resource-group "$RESOURCE_GROUP" \
+#   --default-action Deny
 
 # Get storage account key
 ACCOUNT_KEY=$(az storage account keys list --resource-group "$RESOURCE_GROUP" --account-name "$STORAGE_ACCOUNT" --query '[0].value' -o tsv)

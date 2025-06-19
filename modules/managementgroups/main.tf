@@ -66,7 +66,7 @@ resource "azurerm_management_group" "non_prod" {
 
 
 resource "azurerm_management_group" "production" {
-  name        = "ims-platform-production"
+  name        = "ims-platform-prod"
   display_name = "ims-platform-production"
   parent_management_group_id = azurerm_management_group.platform.id
 }
