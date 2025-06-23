@@ -73,7 +73,6 @@ jobs:
 
       - name: Terraform Apply management groups
         if: ${{ success() }}
-        environment: prod-approval # <-- Add this line
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
