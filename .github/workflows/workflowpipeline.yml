@@ -47,15 +47,6 @@ jobs:
           modules/managementgroups/bootstrap.sh
 
       - name: Terraform Init and Plan management groups
-        env:
-          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-          TF_VAR_backend_resource_group_name: ${{ secrets.BACKEND_RESOURCE_GROUP_NAME }}
-          TF_VAR_backend_storage_account_name: ${{ secrets.BACKEND_STORAGE_ACCOUNT_NAME }}
-          TF_VAR_backend_container_name: ${{ secrets.BACKEND_CONTAINER_NAME }}
-          TF_VAR_backend_key: managementgroups.terraform.tfstate
         run: |
           cd modules/managementgroups
           terraform init -reconfigure \
@@ -66,16 +57,9 @@ jobs:
           terraform plan -out=tfplan
           terraform show -no-color tfplan > plan.txt
 
-      - name: Upload plan for approval
-        uses: actions/upload-artifact@v4
-        with:
-          name: tfplan-artifact
-          path: modules/managementgroups/tfplan
-      - name: Upload plan output for visibility
-        uses: actions/upload-artifact@v4
-        with:
-          name: plan-output
-          path: modules/managementgroups/plan.txt
+      - name: List files for debug
+        run: ls -l modules/managementgroups
+
       - name: Upload lock file
         uses: actions/upload-artifact@v4
         with:
