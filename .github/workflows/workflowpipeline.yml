@@ -64,23 +64,17 @@ jobs:
             -backend-config="container_name=${TF_VAR_backend_container_name}" \
             -backend-config="key=${TF_VAR_backend_key}"
           terraform plan -out=tfplan
-          - name: Review Terraform Plan and Await Manual Approval
-            uses: trstringer/manual-approval@v1
-            with:
-              secret: ${{ github.TOKEN }}
-              approvers: user1,user2
-              instructions: "Please review the Terraform plan output and approve to proceed with apply."
 
-          - name: Terraform Apply management groups
-            if: ${{ success() }}
-            env:
-              ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-              ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-              ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-              ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-            run: |
-              cd modules/managementgroups
-              terraform apply -auto-approve tfplan
+      - name: Terraform Apply management groups
+        if: ${{ success() }}
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+        run: |
+          cd modules/managementgroups
+          terraform apply -auto-approve tfplan
 
       - name: Terraform Drift Detection
         env:
