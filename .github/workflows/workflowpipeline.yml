@@ -62,10 +62,11 @@ jobs:
             -backend-config="resource_group_name=${TF_VAR_backend_resource_group_name}" \
             -backend-config="storage_account_name=${TF_VAR_backend_storage_account_name}" \
             -backend-config="container_name=${TF_VAR_backend_container_name}" \
-            -backend-config="key=${TF_VAR_backend_key}"
+            -backend-config="key=${TF_VAR_backend_key}" \
+            -lockfile=write
           terraform plan -out=tfplan
-          terraform show -no-color tfplan > plan.txt
-
+          terraform show -no-color tfplan > plan.txt   
+        
       - name: List files for debug
         run: ls -l modules/managementgroups
 
