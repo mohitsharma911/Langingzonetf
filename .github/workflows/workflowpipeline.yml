@@ -21,7 +21,7 @@ jobs:
           client-id: ${{ secrets.ARM_CLIENT_ID }}
           tenant-id: ${{ secrets.ARM_TENANT_ID }}
           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          audience: api://AzureADTokenExchange #OIDC audience restriction for Azure login in your GitHub Actions workflow,
+          audience: api://AzureADTokenExchange
 
       - uses: hashicorp/setup-terraform@v3.1.0
         with:
@@ -66,7 +66,7 @@ jobs:
           terraform providers lock
           terraform plan -out=tfplan
           terraform show -no-color tfplan > plan.txt  
-        
+
       - name: List files for debug
         run: ls -l modules/managementgroups
 
@@ -76,10 +76,29 @@ jobs:
           name: terraform-lock
           path: modules/managementgroups/.terraform.lock.hcl
 
-  apply-managementgroups:
+      - name: Upload tfplan artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan-artifact
+          path: modules/managementgroups/tfplan
+
+  manual-approval:
     needs: plan-managementgroups
     runs-on: ubuntu-latest
-    environment: prod-approval
+    steps:
+      - name: Await manual approval before apply
+        uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: user1,user2
+          minimum-approvals: 1
+          issue-title: "Manual approval required for management group apply"
+          issue-body: "Please approve to proceed with Terraform apply for management groups."
+          exclude-workflow-initiator-as-approver: false
+
+  apply-managementgroups:
+    needs: manual-approval
+    runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
