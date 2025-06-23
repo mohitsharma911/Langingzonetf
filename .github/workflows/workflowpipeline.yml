@@ -127,7 +127,7 @@ jobs:
           TF_VAR_backend_container_name: ${{ secrets.BACKEND_CONTAINER_NAME }}
           TF_VAR_backend_key: managementgroups.terraform.tfstate
         run: |
-          cd modules/managementgroups          
+          cd modules/managementgroups
           terraform apply -auto-approve tfplan
 
       - name: Terraform Drift Detection
