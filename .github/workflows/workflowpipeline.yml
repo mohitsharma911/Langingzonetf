@@ -10,8 +10,9 @@ jobs:
   plan-managementgroups:
     runs-on: ubuntu-latest
     permissions:
-      id-token: write
       contents: read
+      issues: write
+      id-token: write
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4.1.1
