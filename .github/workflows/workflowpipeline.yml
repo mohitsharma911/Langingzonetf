@@ -72,11 +72,11 @@ jobs:
       - name: List files for debug
         run: ls -l modules/managementgroups
 
-      - name: Upload lock file
+      - name: Upload plan.txt artifact
         uses: actions/upload-artifact@v4
         with:
-          name: terraform-lock
-          path: modules/managementgroups/.terraform.lock.hcl
+          name: plan-txt-artifact
+          path: modules/managementgroups/plan.txt
 
       - name: Upload tfplan artifact
         uses: actions/upload-artifact@v4
@@ -125,11 +125,13 @@ jobs:
           name: tfplan-artifact
           path: modules/managementgroups
 
-      - name: Download lock file
+      - name: Download plan.txt artifact
         uses: actions/download-artifact@v4
         with:
-          name: terraform-lock
+          name: plan-txt-artifact
           path: modules/managementgroups
+
+      # Remove or update the lock file download step if not needed
 
       - name: Terraform Apply management groups
         env:
