@@ -80,6 +80,7 @@ jobs:
   apply-managementgroups:
     needs: plan-managementgroups
     runs-on: ubuntu-latest
+    environment: prod-approval
     permissions:
       id-token: write
       contents: read
