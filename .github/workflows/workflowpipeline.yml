@@ -8,6 +8,7 @@ env:
 
 jobs:
   deploy-managementgroups:
+    environment: prod-approval
     permissions:
       id-token: write
       contents: read
@@ -64,12 +65,6 @@ jobs:
             -backend-config="container_name=${TF_VAR_backend_container_name}" \
             -backend-config="key=${TF_VAR_backend_key}"
           terraform plan -out=tfplan
-
-      # Manual approval step using environment
-      - name: Await manual approval before apply
-        uses: peter-evans/wait-for-approval@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Terraform Apply management groups
         if: ${{ success() }}
