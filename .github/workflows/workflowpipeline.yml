@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  terraformVersion: '1.12.2'
+  terraformVersion: '1.5.7'
 
 jobs:
   plan-managementgroups:
