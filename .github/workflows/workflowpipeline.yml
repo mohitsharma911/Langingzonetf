@@ -83,6 +83,12 @@ jobs:
           name: tfplan-artifact
           path: modules/managementgroups/tfplan
 
+      - name: Upload lock file artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lockfile-artifact
+          path: modules/managementgroups/.terraform.lock.hcl
+
   manual-approval:
     needs: plan-managementgroups
     runs-on: ubuntu-latest
@@ -130,7 +136,11 @@ jobs:
           name: plan-txt-artifact
           path: modules/managementgroups
 
-      # Remove or update the lock file download step if not needed
+      - name: Download lock file artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: lockfile-artifact
+          path: modules/managementgroups
 
       - name: Terraform Apply management groups
         env:
