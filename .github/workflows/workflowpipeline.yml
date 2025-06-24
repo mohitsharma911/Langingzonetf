@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   issues: write
   id-token: write
 
@@ -77,8 +77,8 @@ jobs:
       - name: Upload lock file artifact
         uses: actions/upload-artifact@v4
         with:
-           name: lockfile-artifact
-           path: .terraform.lock.hcl
+          name: lockfile-artifact
+          path: modules/managementgroups/.terraform.lock.hcl
 
       - name: Upload plan.txt artifact
         uses: actions/upload-artifact@v4
