@@ -61,3 +61,4 @@ jobs:
           if [ "$changes" -eq "0" ]; then
             echo "No changes to apply. Exiting."
             exit 1
+          fi
