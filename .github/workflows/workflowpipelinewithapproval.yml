@@ -155,11 +155,11 @@ jobs:
           name: plan-txt-artifact
           path: modules/managementgroups
 
-      - name: Download lock file artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: terraform-workspace
-          path: modules/managementgroups
+      # - name: Download lock file artifact
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: terraform-workspace
+      #     path: modules/managementgroups
 
       - name: Terraform Apply management groups
         env:
