@@ -69,11 +69,12 @@ jobs:
       - name: List files for debug
         run: ls -l modules/managementgroups
 
-      - name: Upload lock file
+      - name: Upload .terraform.lock.hcl
         uses: actions/upload-artifact@v4
         with:
           name: terraform-lock
-          path: modules/managementgroups/.terraform.lock.hcl
+          path: /home/runner/work/Langingzonetf/Langingzonetf/modules/managementgroups/.terraform.lock.hcl
+          include-hidden-files: true
 
   apply-managementgroups:
     needs: plan-managementgroups
