@@ -76,6 +76,12 @@ jobs:
           path: /home/runner/work/Langingzonetf/Langingzonetf/modules/managementgroups/.terraform.lock.hcl
           include-hidden-files: true
 
+      - name: Upload tfplan artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan-artifact
+          path: modules/managementgroups/tfplan
+
   apply-managementgroups:
     needs: plan-managementgroups
     runs-on: ubuntu-latest
