@@ -81,15 +81,17 @@ jobs:
           terraform plan -lock=false -input=false -out=tfplan
           terraform show -no-color tfplan > plan.txt  
 
-      - name: List files for debug
-        run: ls -al modules/managementgroups
-
-
       - name: Upload tfplan artifact
         uses: actions/upload-artifact@v4
         with:
           name: tfplan-artifact
           path: modules/managementgroups/tfplan
+
+      - name: Upload lock file artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lockfile-artifact
+          path: modules/managementgroups/.terraform.lock.hcl
 
   manual-approval:
     needs: plan-managementgroups
@@ -130,6 +132,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: tfplan-artifact
+          path: modules/managementgroups
+
+      - name: Download lock file artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: lockfile-artifact
           path: modules/managementgroups
 
 
