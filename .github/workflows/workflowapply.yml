@@ -49,4 +49,4 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         run: |
           cd modules/managementgroups
-          terraform apply -auto-approve tfplan
+          terraform apply -auto-approve
