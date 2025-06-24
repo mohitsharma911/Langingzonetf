@@ -140,16 +140,19 @@ jobs:
           name: lockfile-artifact
           path: modules/managementgroups
 
+      - name: Use downloaded .terraform.lock.hcl
+        run: |
+          cp modules/managementgroups/.terraform.lock.hcl modules/managementgroups/.terraform.lock.hcl
 
       - name: Terraform Apply management groups
         env:
-          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+            ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+            ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+            ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+            ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         run: |
-          cd modules/managementgroups
-          terraform apply -auto-approve tfplan
+            cd modules/managementgroups
+            terraform apply -auto-approve tfplan
 
       - name: Terraform Drift Detection
         env:
