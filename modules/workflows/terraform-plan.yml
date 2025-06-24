@@ -42,6 +42,13 @@ jobs:
             -backend-config="key=${TF_VAR_backend_key}"
           terraform plan -out=tfplan
 
+      - name: Upload Terraform Plan Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: plan
+          path: modules/managementgroups/tfplan
+          retention-days: 5
+
       - name: Check and Verify Terraform Plan
         run: |
           cd modules/managementgroups
@@ -52,3 +59,4 @@ jobs:
           if [ "$changes" -eq "0" ]; then
             echo "No changes to apply. Exiting."
             exit 1
+          fi
