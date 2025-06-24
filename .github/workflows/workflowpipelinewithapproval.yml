@@ -84,11 +84,17 @@ jobs:
       - name: List files for debug
         run: ls -al modules/managementgroups
 
-      - name: Upload lock file artifact
+      - name: Copy .terraform.lock.hcl to workspace
+        run: |
+          cp modules/managementgroups/.terraform.lock.hcl /home/runner/work/Langingzonetf/Langingzonetf/modules/managementgroups/.terraform.lock.hcl
+          echo "Lock file copied to workspace."
+
+      - name: Upload .terraform.lock.hcl
         uses: actions/upload-artifact@v4
         with:
-          name: lockfile-artifact
-          path: modules/managementgroups/.terraform.lock.hcl
+          name: terraform-workspace
+          path: /home/runner/work/Langingzonetf/Langingzonetf/modules/managementgroups/.terraform.lock.hcl
+          include-hidden-files: true
 
       - name: Upload plan.txt artifact
         uses: actions/upload-artifact@v4
@@ -152,7 +158,7 @@ jobs:
       - name: Download lock file artifact
         uses: actions/download-artifact@v4
         with:
-          name: lockfile-artifact
+          name: terraform-workspace
           path: modules/managementgroups
 
       - name: Terraform Apply management groups
