@@ -44,17 +44,17 @@ jobs:
       - name: Download tfplan artifact
         uses: actions/download-artifact@v4
         with:
-          name: terraform-plan
-          path: modules/managementgroups
+          name: plan
+          path: .
 
-      - name: List files in modules/managementgroups
+      - name: List files in workspace
         run: |
-          ls -l modules/managementgroups
+          ls -l .
 
       - name: Check tfplan exists
         run: |
-          if [ ! -f modules/managementgroups/tfplan ]; then
-            echo "tfplan artifact not found. Skipping apply."
+          if [ ! -f tfplan.txt ]; then
+            echo "tfplan.txt artifact not found. Skipping apply."
             exit 0
           fi
 
@@ -67,4 +67,4 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         run: |
           cd modules/managementgroups
-          terraform apply -auto-approve tfplan
+          terraform apply -auto-approve ../../tfplan.txt
