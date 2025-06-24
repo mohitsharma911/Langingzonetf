@@ -84,10 +84,10 @@ jobs:
       - name: List files for debug
         run: ls -al modules/managementgroups
 
-      - name: Copy .terraform.lock.hcl to workspace
-        run: |
-          cp modules/managementgroups/.terraform.lock.hcl /home/runner/work/Langingzonetf/Langingzonetf/modules/managementgroups/.terraform.lock.hcl
-          echo "Lock file copied to workspace."
+      # - name: Copy .terraform.lock.hcl to workspace
+      #   run: |
+      #     cp modules/managementgroups/.terraform.lock.hcl /home/runner/work/Langingzonetf/Langingzonetf/modules/managementgroups/.terraform.lock.hcl
+      #     echo "Lock file copied to workspace."
 
       - name: Upload .terraform.lock.hcl
         uses: actions/upload-artifact@v4
