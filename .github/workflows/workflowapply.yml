@@ -44,7 +44,7 @@ jobs:
       - name: Download tfplan artifact
         uses: actions/download-artifact@v4
         with:
-          name: plan
+          name: apply-plan
           path: .
 
       - name: List files in workspace
