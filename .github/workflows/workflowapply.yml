@@ -45,9 +45,17 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: terraform-plan
-          path: modules/managementgroups
+          path: modules/managementgroups/tfplan
+
+      - name: Check tfplan exists
+        run: |
+          if [ ! -f modules/managementgroups/tfplan ]; then
+            echo "tfplan artifact not found. Skipping apply."
+            exit 0
+          fi
 
       - name: Terraform Apply
+        if: success()
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
