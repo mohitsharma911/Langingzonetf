@@ -86,7 +86,7 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         run: |
           cd modules/managementgroups
-          echo "yes" | terraform apply tfplan
+          terraform apply tfplan 
 
       - name: Terraform Drift Detection
         env:
