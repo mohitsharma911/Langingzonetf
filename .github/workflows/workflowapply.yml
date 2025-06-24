@@ -46,6 +46,9 @@ jobs:
         with:
           name: terraform-plan
           path: modules/managementgroups
+          - name: List files in modules/managementgroups
+            run: |
+              ls -l modules/managementgroups
 
       - name: Check tfplan exists
         run: |
