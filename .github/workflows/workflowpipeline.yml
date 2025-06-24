@@ -66,6 +66,18 @@ jobs:
             -backend-config="key=${TF_VAR_backend_key}"
           terraform plan -out=tfplan
 
+      - name: Check and Verify Terraform Plan
+        run: |
+          cd modules/managementgroups
+          terraform show -no-color tfplan > plan.txt
+          cat plan.txt
+          terraform show -json tfplan > plan.json
+          changes=$(jq '.resource_changes | length' plan.json)
+          if [ "$changes" -eq "0" ]; then
+            echo "No changes to apply. Exiting."
+            exit 1
+          fi
+
       - name: Terraform Apply management groups
         if: ${{ success() }}
         env:
@@ -75,7 +87,7 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         run: |
           cd modules/managementgroups
-          terraform apply -auto-approve tfplan
+          echo "yes" | terraform apply tfplan
 
       - name: Terraform Drift Detection
         env:
