@@ -71,9 +71,6 @@ jobs:
       - name: List files for debug
         run: ls -al modules/managementgroups
 
-      - name: Change directory to modules/managementgroups
-        run: cd modules/managementgroups
-
       - name: Upload lock file artifact
         uses: actions/upload-artifact@v4
         with:
