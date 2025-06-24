@@ -92,6 +92,7 @@ jobs:
         with:
           name: lockfile-artifact
           path: modules/managementgroups/.terraform.lock.hcl
+        if-no-files-found: error   # Fail if lock file is missing
 
   manual-approval:
     needs: plan-managementgroups
