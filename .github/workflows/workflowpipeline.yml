@@ -117,25 +117,3 @@ jobs:
         run: |
           cd modules/managementgroups
           terraform apply -auto-approve
-
-      - name: Call Terraform Plan Workflow
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'workflows/terraform-plan.yml',
-              ref: 'main'
-            })
-
-      - name: Call Terraform Apply Workflow
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'workflows/terraform-apply.yml',
-              ref: 'main'
-            })
