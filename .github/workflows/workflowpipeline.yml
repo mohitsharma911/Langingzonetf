@@ -11,7 +11,6 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    if: ${{ github.event.inputs.stageToRun == 'DeployModules' && github.event.inputs.jobToRun == 'DeployManagementGroups' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
