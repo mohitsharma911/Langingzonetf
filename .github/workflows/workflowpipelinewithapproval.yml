@@ -91,7 +91,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: lockfile-artifact
-          path: modules/managementgroups
+          path: modules/managementgroups/.terraform.lock.hcl
 
   manual-approval:
     needs: plan-managementgroups
