@@ -5,5 +5,6 @@ output "management_group_ids" {
     sandbox_group_id      = azurerm_management_group.sandbox.id
     non_prod_group_id     = azurerm_management_group.non_prod.id
     decommissioned_group_id = azurerm_management_group.decommissioned.id
+    production_group_id = azurerm_management_group.production.id
   }
 }

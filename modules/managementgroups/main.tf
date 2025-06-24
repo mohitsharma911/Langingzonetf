@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 3.0"
+      version = "~> 4.0"
     }
   }
   required_version = ">= 1.0"
@@ -47,14 +47,14 @@ resource "azurerm_management_group" "envproduction" {
 }
 
 resource "azurerm_management_group" "sandbox" {
-  name        = "ims-sandbox"
-  display_name = "ims-sandbox"
+  name        = "sandbox"
+  display_name = "sandbox"
   parent_management_group_id = var.root_management_group_id # Use the root management group ID directly
 }
 
 resource "azurerm_management_group" "decommissioned" {
-  name        = "ims-decommissioned"
-  display_name = "ims-decommissioned"
+  name        = "decommissioned"
+  display_name = "decommissioned"
   parent_management_group_id = var.root_management_group_id # Use the root management group ID directly
 }
 
