@@ -11,7 +11,7 @@ az group create --name "$RESOURCE_GROUP" --location "$LOCATION" \
   --tags \
     Purpose="PurposeValue" \
     Name="$RESOURCE_GROUP" \
-    Environment="Dev" \
+    Environment="Prd" \
     Application="ApplicationName" \
     DateCreated="$(date +%Y-%m-%d)" \
     Owner="CustomerInsuranceEngineers@tescobank.com" \
@@ -32,7 +32,20 @@ az storage account create \
   --kind StorageV2 \
   --min-tls-version TLS1_2 \
   --https-only true \
-  --allow-blob-public-access false 
+  --allow-blob-public-access false \
+  --tags \
+    Purpose="PurposeValue" \
+    Name="$STORAGE_ACCOUNT" \
+    Environment="Prd" \
+    Application="ApplicationName" \
+    DateCreated="$(date +%Y-%m-%d)" \
+    Owner="CustomerInsuranceEngineers@tescobank.com" \
+    CostCentre="51355" \
+    Datadog="False" \
+    SNApplicationService="Surface Insurance Production" \
+    SNResolver="AM GI Technical" \
+    SNEnvironment="Production" \
+    ServiceCategory="Category A"
   
 
 # # Restrict access to specific IP ranges
