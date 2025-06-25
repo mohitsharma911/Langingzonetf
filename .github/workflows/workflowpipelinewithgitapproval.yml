@@ -116,7 +116,7 @@ jobs:
         uses: trstringer/manual-approval@v1
         with:
           secret: ${{ github.TOKEN }}
-          approvers: mohitsharma911
+          approvers: Michael-Bain-Admin_tescoims
           minimum-approvals: 1
           issue-title: "Manual approval required for management group apply"
           issue-body: "Please approve to proceed with Terraform apply for management groups."

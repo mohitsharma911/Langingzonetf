@@ -1,7 +1,25 @@
 #!/usr/bin/env bash
 
 # Variables (edit as needed)
-RESOURCE_GROUP="tfstate-tfdemo-rg" # must be unique in the subscription, 1-90 chars, lowercase/numbers/hyphens only
+RESOURCE_GROUP="# ...existing code...
+
+# Create resource group with tags
+az group create --name "$RESOURCE_GROUP" --location "$LOCATION" \
+  --tags \
+    Purpose="PurposeValue" \
+    Name="$RESOURCE_GROUP" \
+    Environment="Dev" \
+    Application="ApplicationName" \
+    DateCreated="$(date +%Y-%m-%d)" \
+    Owner="CustomerInsuranceEngineers@tescobank.com" \
+    CostCentre="51355" \
+    Datadog="False" \
+    SNApplicationService="Surface Insurance Production" \
+    SNResolver="AM GI Technical" \
+    SNEnvironment="Production" \
+    ServiceCategory="Category A"
+
+# ...existing code..." # must be unique in the subscription, 1-90 chars, lowercase/numbers/hyphens only
 LOCATION="eastus" # Azure region, e.g., eastus, westus, etc.
 STORAGE_ACCOUNT="zentfstatedemostg" # must be globally unique, 3-24 chars, lowercase/numbers only
 CONTAINER="tfstate"
