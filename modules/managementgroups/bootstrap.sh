@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
 # Variables (edit as needed)
-RESOURCE_GROUP="# ...existing code...
+RESOURCE_GROUP="tfstate-tfdemo-rg" # must be unique in the subscription, 1-90 chars, lowercase/numbers/hyphens only
+LOCATION="eastus" # Azure region, e.g., eastus, westus, etc.
+STORAGE_ACCOUNT="zentfstatedemostg" # must be globally unique, 3-24 chars, lowercase/numbers only
+CONTAINER="tfstate"
 
-# Create resource group with tags
+# Create resource group
 az group create --name "$RESOURCE_GROUP" --location "$LOCATION" \
   --tags \
     Purpose="PurposeValue" \
@@ -17,15 +20,8 @@ az group create --name "$RESOURCE_GROUP" --location "$LOCATION" \
     SNApplicationService="Surface Insurance Production" \
     SNResolver="AM GI Technical" \
     SNEnvironment="Production" \
-    ServiceCategory="Category A"
-
-# ...existing code..." # must be unique in the subscription, 1-90 chars, lowercase/numbers/hyphens only
-LOCATION="eastus" # Azure region, e.g., eastus, westus, etc.
-STORAGE_ACCOUNT="zentfstatedemostg" # must be globally unique, 3-24 chars, lowercase/numbers only
-CONTAINER="tfstate"
-
-# Create resource group
-az group create --name "$RESOURCE_GROUP" --location "$LOCATION"
+    ServiceCategory="Category A" 
+  
 
 # Create storage account with guardrails
 az storage account create \
